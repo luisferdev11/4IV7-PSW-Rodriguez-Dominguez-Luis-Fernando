@@ -1,0 +1,95 @@
+/*
+Vamos a crear animaciones con css
+a partir de condicionales
+*/
+
+/*transicion de colores*/
+
+@keyframes animation_test{
+    from{
+        background-color: red;
+    }
+    to{
+        background-color: rgb(77, 209, 165);
+    }
+}
+
+/*Hacer girar un circulo*/
+
+@keyframes girar{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+/*hacer girar una cara*/
+
+@keyframes label-animation{
+    from{
+        transform: rotate(0deg);
+        margin-left: 0;
+    }
+    to{
+        transform: rotate(180deg);
+        margin-left: 85vw;
+    }
+}
+
+.container-label{
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.label{
+    width: 64px;
+    background-color: purple;
+    color: rgb(241, 230, 68);
+    font-size: 1.3rem;
+    padding: 1rem;
+    border-radius: 40px;
+    text-align: center;
+    /*metemos la animacion*/
+    animation-name: label-animation;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.loader{
+    width: 64px;
+    height: 64px;
+    border: 5px solid rgb(90, 180, 220);
+    border-top: 5px solid rgb(10, 100, 20);
+    border-radius: 50%;
+    animation: girar 2s linear infinite;
+}
+
+.loader-double{
+    width: 64px;
+    height: 64px;
+    border: 16px solid rgb(30, 230, 220);
+    border-top: 16px solid rgb(250, 50, 100);
+    border-bottom: 16px solid rgba(122, 70, 118, 0.979);
+    border-radius: 50%;
+    animation: girar 2s ease-in-out infinite;
+}
+
+.animada{
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: animation_test;
+    animation-duration: 2s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}

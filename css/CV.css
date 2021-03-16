@@ -1,0 +1,9 @@
+:root{
+    --main-color: #55DDE0;
+    --second-color: #33658A;
+    --third-color: #2F4858;
+}
+
+.skills, .estudios{
+    background-color: var(--main-color);
+}

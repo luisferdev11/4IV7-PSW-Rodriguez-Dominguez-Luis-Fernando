@@ -1,6 +1,8 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    list-style-type: none;
 }
 
 ul{
@@ -13,6 +15,28 @@ a{
     text-decoration: none;
 }
 
+body{
+    background: linear-gradient(45deg, rgb(22, 200, 231), rgb(129, 0, 168))
+}
+
+.titulo{
+    text-align: center;
+    padding: 1em;
+    margin-top: 40px;
+}
+
+.curriculum{
+    width: 85%;
+    background-color: aliceblue;
+    margin: auto;
+    margin-top: 70px;
+    margin-bottom: 10%;
+}
+
+.subtitulos{
+    margin-left: 25px;
+}
+
 :root{
     --main-color: #55DDE0;
     --second-color: #33658A;
@@ -21,29 +45,43 @@ a{
 
 .skills, .estudios{
     background-color: var(--main-color);
-    width: 40%;
+    max-width: 40%;
     text-align: center;
     color: black;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 20px;
 }
 
 .info{
     background-color: var(--second-color);
     color: aliceblue;
+    max-width: 40%;
+    margin: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .contacto, .hobbies{
     background-color: var(--third-color);
     color: aliceblue;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin: 20px;
+    max-width: 40%;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-body{
-    margin: 30px 0;
-    font: 22px sans-serif;
-}
 
 .menu{
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 
@@ -99,4 +137,14 @@ body{
 
 .menu[data-animation="to-top"] a:hover span:first-child{
     transform: translateY(-100%);
+}
+
+.img{
+    max-width: 40%;
+    display: block;
+    padding: 1em;
+}
+
+.certificado{
+    width: 100%;
 }

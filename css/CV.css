@@ -148,3 +148,13 @@ body{
 .certificado{
     width: 100%;
 }
+
+.regreso{
+    display: inline-block;
+    padding: 1rem;
+}
+
+.pie{
+    display: inline-block;
+    padding: .5rem;
+}

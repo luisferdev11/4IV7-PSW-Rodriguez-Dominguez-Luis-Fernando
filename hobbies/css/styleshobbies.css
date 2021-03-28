@@ -25,6 +25,17 @@ body{
     top: 0;
 }
 
+.video-menu{
+    background-color: var(--naranja);
+    position: fixed;
+    padding: .5em;
+    text-align: center;
+    font-size: 2em;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
 .title{
     margin: 0;
 }
@@ -38,7 +49,7 @@ body{
 
 .contenido{
     display: flex;
-    padding-top: 10em;
+    padding-top: 12em;
 }
 
 .foot{

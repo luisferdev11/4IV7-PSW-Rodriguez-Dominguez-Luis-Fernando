@@ -14,26 +14,22 @@ body{
     margin: 0;
 }
 
-.menu{
+
+[class|="menu"]{
     position: fixed;
-    background: var(--azul);
+    background-color: var(--azul);
     padding: .5em;
     text-align: center;
     font-size: 2em;
     position: fixed;
     width: 100%;
     top: 0;
+    display: flex;
+    flex-direction: column;
 }
 
-.video-menu{
+.menu-videojuegos{
     background-color: var(--naranja);
-    position: fixed;
-    padding: .5em;
-    text-align: center;
-    font-size: 2em;
-    position: fixed;
-    width: 100%;
-    top: 0;
 }
 
 .title{
@@ -41,6 +37,7 @@ body{
 }
 
 .menu__option, .pie{
+    display: inline-flex;
     text-decoration: none;
     padding: 1em;
     font-size: .7em;
@@ -50,6 +47,17 @@ body{
 .contenido{
     display: flex;
     padding-top: 12em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.contenido__texto{
+    width: 100%;
+    height: max-content;
+    padding: 5em 3em;
+    background-color:#6eb1d8;
+    font-size: 1.1em;
+
 }
 
 .foot{
@@ -61,4 +69,10 @@ body{
     width: 100%;
     bottom: 0;
     color: white;
+}
+
+@media(max-width:768px){
+    .contenido{
+        padding-top: 16em;
+    }
 }

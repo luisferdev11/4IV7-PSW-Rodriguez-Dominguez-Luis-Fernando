@@ -77,6 +77,28 @@ function problema2(){
     }
 
     //imprimir el resultado
-    document.querySelector('#p2-output').textContent = 
-    'Producto escalar minimo : '+p2_producto;
+    document.querySelector('#p2-output').textContent = 'Producto escalar minimo : '+p2_producto;
+}
+
+
+function problema3(){
+    
+    //obtenemos los valores y nos deshacemos de los espacios y lo convertimos en un array
+    var p3_input = document.querySelector('#p3-input').value.replace(/ /gi,"");
+
+    var p3_array = p3_input.split(',');
+    //console.log(p3_array);
+
+    for(var i=0 ; i<p3_array.length ; i++){
+        a = p3_array[i].split('');
+        var a_sinrepetir = a.filter(function (item, pos){
+            return a.indexOf(item) == pos;
+        });
+        console.log(p3_array[i] + " = " + a_sinrepetir.length + "(" + a_sinrepetir +")");
+            //Ejemplos:
+            //CASA = 3(c, a, s) PERRO= 4(p, e, r, o)
+        document.querySelector('#p3-output').innerHTML += "<p>" + p3_array[i].trim() + " = " + a_sinrepetir.length + "(" + a_sinrepetir +")" + "</p>";
+    }  
+
+    //document.querySelector('#p3-output').textContent = p3_array;
 }

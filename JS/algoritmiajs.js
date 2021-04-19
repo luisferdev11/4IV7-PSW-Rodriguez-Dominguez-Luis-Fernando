@@ -83,6 +83,7 @@ function problema2(){
 
 function problema3(){
     
+    document.querySelector('#p3-output').textContent = "";
     //obtenemos los valores y nos deshacemos de los espacios y lo convertimos en un array
     var p3_input = document.querySelector('#p3-input').value.replace(/ /gi,"");
 

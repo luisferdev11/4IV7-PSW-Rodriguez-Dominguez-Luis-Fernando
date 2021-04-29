@@ -11,6 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//permite realizar la conexion con la base de datos
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+//permite utilizar las sentecnias de sql (create, delete, drop, update)
+import java.sql.Statement;
+
+//permite realizar las consultas con la base de datos
+import java.sql.ResultSet;
+import javax.servlet.ServletConfig;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -26,14 +37,60 @@ public class Registro extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    // es necesario inicializar los elementos del servlet para que pueda conectarse con la base de datos
+    // vamos a necesitar tres objetos que vengan de la clase sql
+    
+    private Connection con;
+    private Statement set;
+    private ResultSet rs;
+    
+    
+    //vamos a crear el metodo constructor
+    public void init(ServletConfig cfg) throws ServletException{
+        
+        // para conectarnos con la base de datos
+        String url = "jdbc:mysql://localhost:3307/registro4iv7";
+                    //driver:gestorBD:puerto//IP/nombreBD
+                    
+        String userName = "root";
+        String password = "elchinodragonball";
+        
+        try {
+            
+            Class.forName("com.mysql.jdbc.Driver");
+            // a veces el driver ya maneja por defecto el puerto, es por ello que puede
+            // llegar a mandar algun error, en ese caso driver:gestorBD://IP/nombreBD
+            // jdbc:mysql://localhost/registro4iv7
+            
+            con = DriverManager.getConnection(url, userName, password);
+            set = con.createStatement();
+            
+            System.out.println("Se ha conectado a la base de datos");
+            
+        } catch (Exception e) {
+            System.out.println("No se ha conectado");
+            System.out.println(e.getMessage());
+            System.out.println(e.getStackTrace());
+        }
+    }
+   
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-            String nom,appat,apmat,correo;
-            int edad;
+            String nom, appat, apmat, correo, ip, iph;
+            int edad, puerto, puertoh;
+            
+            ip = request.getLocalAddr();
+            puerto = request.getLocalPort();
+            
+            iph = request.getRemoteAddr();
+            puertoh = request.getRemotePort();
+            
             
             nom = request.getParameter("nombre");
             appat = request.getParameter("appat");
@@ -41,27 +98,89 @@ public class Registro extends HttpServlet {
             edad = Integer.parseInt(request.getParameter("edad"));
             correo = request.getParameter("correo");
             
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Registro</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Registro Exitoso</h1>"
-                    + "<a href='index.html'>Regresar al menú principal</a>"
-                    + "<br>"
-                    + "Tu nombre es: "+nom
-                    + "<br>"
-                    + "Tu apellido paterno es: "+appat
-                    + "<br>"
-                    + "Tu apellido materno es: "+apmat
-                    + "<br>"
-                    + "Tu edad es: "+edad
-                    + "<br>"
-                    + "Tu correo es: "+correo
-                    + "<br>");
-            out.println("</body>");
-            out.println("</html>");
+            
+            try {
+                
+                // query para poder insertar los datos en la base de datos
+                /*
+                    insert into nombretabla (atributo1, atributo2, ...)
+                    value (valor1, valor2, ...)
+                */
+                
+                String q = "insert into mregistro (nom_usu, appat_usu, "
+                        + "apmat_usu, edad_usu, email_usu)"
+                        + "values ('"+nom+"','"+appat+"','"+apmat+"',"+edad+",'"+correo+"')";
+                
+                //inserta los datos
+                set.executeUpdate(q);
+                
+                
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet Registro</title>"
+                        + "<link rel=\"stylesheet\" href=\"css/style.css\">");            
+                out.println("</head>");
+                out.println("<body class='contenedor-Actualizar'>"
+                        + "<div>");
+                out.println("<h1>Registro Exitoso</h1>"
+
+                        + "Tu nombre es: "+nom
+                        + "<br>"
+                        + "Tu apellido paterno es: "+appat
+                        + "<br>"
+                        + "Tu apellido materno es: "+apmat
+                        + "<br>"
+                        + "Tu edad es: "+edad
+                        + "<br>"
+                        + "Tu correo es: "+correo
+                        + "<br>"
+                        + "La IP Local es: "+ip
+                        + "<br>"
+                        + "La IP del host: "+iph
+                        + "<br>"
+                        + "Puerto Local: " + puerto
+                        + "<br>"
+                        + "Puerto Host:" + puertoh
+                        + "<br>"
+                        + "<a href='index.html'>Regresar al formulario</a>"
+                        + "<br>"
+                        + "<a href='Consultar'>Consultar la Tabla General de Usuarios</a>"
+                                + "</div>");
+                out.println("</body>");
+                out.println("</html>");
+                
+                System.out.println("Datos registrados en la tabla");
+            } catch (Exception e) {
+            
+                System.out.println("No se registraron los datos en la tabla");
+                System.out.println(e.getMessage());
+                System.out.println(e.getStackTrace());
+                
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet Registro</title>"
+                        + "<link rel=\"stylesheet\" href=\"css/style.css\">");            
+                out.println("</head>");
+                out.println("<body class='contenedor-Eliminar'>"
+                        + "<div>"
+                        + "<h1>No se pudo registrar, hubo un error</h1>"
+                + "<a href='index.html'>Regresar al formulario</a>"
+                + "<br>"
+                + "<a href='Consultar'>Consultar la Tabla General de Usuarios</a>"
+                        + "</div>");
+                out.println("</body>");
+                out.println("</html>");
+            }  
+        }
+    }
+    
+    public void destroy(){
+        try {
+            con.close();
+        } catch (Exception e) {
+            super.destroy();
         }
     }
 

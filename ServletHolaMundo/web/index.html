@@ -9,35 +9,82 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div class="container">
-            <div class="contenedorRegistro">
-                <form method="post" name="formulario" action="Registro">
-                    <label>Nombre: </label>
-                    <br>
-                    <input type="text" name="nombre">
-                    <br>
-                    <label>Appellido paterno: </label>
-                    <br>
-                    <input type="text" name="appat">
-                    <br>
-                    <label>Apellido materno: </label>
-                    <br>
-                    <input type="text" name="apmat">
-                    <br>
-                    <label>Edad: </label>
-                    <br>
-                    <input type="number" name="edad">
-                    <br>
-                    <label>Email: </label>
-                    <br>
-                    <input type="email" name="correo">
-                    <br>
-                    <input type="submit" value="Registrar Usuario">
-                    <input type="reset" value="Borrar datos">
-                </form>
-            </div>
+        <div class="contenedor-Registrar">
+            <h1>Registrar Usuario</h1>
+            <form method="post" name="formulario" action="Registro" id="form">
+                <label>Nombre: </label>
+                <br>
+                <input type="text" name="nombre">
+                <br>
+                <label>Appellido paterno: </label>
+                <br>
+                <input type="text" name="appat">
+                <br>
+                <label>Apellido materno: </label>
+                <br>
+                <input type="text" name="apmat">
+                <br>
+                <label>Edad: </label>
+                <br>
+                <input type="number" name="edad" min="01" max="99" size="2">
+                <br>
+                <label>Email: </label>
+                <br>
+                <input type="email" name="correo">
+                <br>
+                <input type="submit" value="Registrar Usuario" class="boton">
+                <input type="reset" value="Borrar datos" class="boton">
+            </form>
+            <br>
+            <br>
+        </div>
+        
+        <div class="contenedor-Consultar">
+            <br>
+            <h1>Consultar Usuarios</h1>
+            <form method="get" name="formularioconsultar" action="Consultar">
+                <input type="submit" value="Consultar tabla" class="boton">
+            </form>
+            <br>
+            <br>
+        </div>
+        
+        <div class="contenedor-Eliminar" >
+            <br>
+            <h1>Eliminar Usuario</h1>
+            <form method="post" name="formularioeliminar" action="Eliminar">
+                <label>Ingresa el ID del usuario que deseas eliminar</label>
+                <input type="number" name="ideliminar" >
+                <input type="submit" value="Eliminar Usuario" class="boton">
+            </form>
+            <br>
+            <br>
+        </div>
+        
+        <div class="contenedor-Actualizar" >
+            <br>
+            <h1>Modificar Usuario</h1>
+            <form method="post" name="formulariomodificar" action="Modificar">
+                <label>Ingresa el ID del usuario que desea Modificar</label>
+                <input type="number" name="idmodificar" >
+                <label>Selecciona el campo a modificar</label>
+                <select name="Seleccion" id="Seleccion" >
+                    <option value="nombre">Nombre</option>
+                    <option value="appat">Apellido paterno</option>
+                    <option value="apmat">Appellido materno</option>
+                    <option value="edad">Edad</option>
+                    <option value="correo">Correo</option>
+                </select>
+                <label>Ingresa el valor por el que lo vas a modificar</label>
+                <input type="text" name="cambio">             
+                <input type="submit" value="Modificar Usuario" class="boton">
+                <!-- UPDATE mregistro SET appat_usu = variable1 where id_usu = variable2 -->
+            </form>
+            <br>
+            <br>
         </div>
     </body>
 </html>
